@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import LandingPage from './views/LandingPage.vue'
 import LoginView from './views/LoginView.vue'
 import RegistroView from './views/RegistroView.vue'
+import AdminMascotasView from './views/AdminMascotasView.vue'
 
 const routes = [
   {
@@ -18,7 +19,12 @@ const routes = [
     path: '/registro',
     name: 'registro',
     component: RegistroView,
-  }
+  },
+  {
+    path: '/listado-mascotas/admin/',
+    name: 'listado-mascotas-admin',
+    component: AdminMascotasView
+  },
 ]
 
 const router = createRouter({

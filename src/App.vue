@@ -36,14 +36,4 @@ body {
     background-attachment: fixed;
     position: relative;
 }
-body::before{
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  filter: blur(2px); /* Ajusta el valor del desenfoque según tus preferencias */
-  z-index: -1;
-}
 </style>

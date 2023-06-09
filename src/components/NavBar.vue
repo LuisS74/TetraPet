@@ -1,7 +1,7 @@
 <template>
     <nav class="navbar navbar-expand-md bg-body-tertiary">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">TetraPet</a>
+            <a class="navbar-brand" href="/">TetraPet</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -25,8 +25,8 @@
                             <i class="fas fa-user"></i>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end">
-                            <li><a class="dropdown-item" href="#">Iniciar Sesión</a></li>
-                            <li><a class="dropdown-item" href="#">Registrarse</a></li>
+                            <li><a class="dropdown-item" href="/login">Iniciar Sesión</a></li>
+                            <li><a class="dropdown-item" href="/registro">Registrarse</a></li>
                         </ul>
                     </li>
                 </ul>

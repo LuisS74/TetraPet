@@ -3,6 +3,7 @@
         <h1 class="titulo">Registrarse</h1>
         <input class="cajas" type="text" placeholder="Nombre" required maxlength="30">
         <input class="cajas" type="text" placeholder="Apellido" required maxlength="30">
+        <input class="cajas" type="text" placeholder="DNI" required maxlength="30">
         <input class="cajas" type="email" placeholder="Email" required maxlength="30">
         <input class="cajas" type="password" placeholder="Password" required maxlength="30">
         <p class="termino1"><input type="checkbox">  Estoy de acuerdo con <a class="termino2" href="">Terminos y Condiciones</a></p>

@@ -13,22 +13,13 @@
         </tr>
       </thead>
       <tbody>
-        <tr class="mascota">
-          <td>1</td>
-          <td>Riñoberto</td>
-          <td>Canino</td>
-          <td>Chihuahua</td>
-          <td>01/01/2020</td>
-          <td>Juanito Perez</td>
-          <td><button class="ver-detalles">Ver detalles</button></td>
-        </tr>
-        <tr class="mascota">
-          <td>2</td>
-          <td>Anastacio</td>
-          <td>Felino</td>
-          <td>No Sabe</td>
-          <td>02/02/2019</td>
-          <td>Juanita Dominguez</td>
+        <tr class="mascota" v-for="mascota in mascotas" :key="mascota.id">
+          <td>{{ mascota.id }}</td>
+          <td>{{ mascota.nombre }}</td>
+          <td>{{ mascota.especie }}</td>
+          <td>{{ mascota.raza }}</td>
+          <td>{{ mascota.fechaNacimiento }}</td>
+          <td>{{ mascota.dueno }}</td>
           <td><button class="ver-detalles">Ver detalles</button></td>
         </tr>
       </tbody>
@@ -39,7 +30,29 @@
 <script>
 export default {
   name: "AdminMascotasView",
-}
+  data() {
+    return {
+      mascotas: [
+        {
+          id: 1,
+          nombre: "Riñoberto",
+          especie: "Canino",
+          raza: "Chihuahua",
+          fechaNacimiento: "05/05/2017",
+          dueno: "Juan Pérez"
+        },
+        {
+          id: 2,
+          nombre: "Anastacio",
+          especie: "Felino",
+          raza: "No Sabe",
+          fechaNacimiento: "10/10/2019",
+          dueno: "María García"
+        }
+      ]
+    };
+  }
+};
 </script>
 
 <style scoped>

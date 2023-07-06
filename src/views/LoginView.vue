@@ -1,10 +1,10 @@
 <template>
     <div class="container" id="container">
         <div class="form-container sign-in-container">
-            <form action="#">
+            <form action="#" @submit.prevent="loginUser">
                 <h1>¡Bienvenido!</h1>
-                <input type="email" placeholder="Correo" required />
-                <input type="password" placeholder="Contraseña" required />
+                <input type="email" placeholder="Correo" v-model="email" required />
+                <input type="password" placeholder="Contraseña" v-model="password" required />
                 <a href="#">¿Perdiste tu contraseña?</a>
                 <button>Iniciar Sesión</button>
             </form>
@@ -18,8 +18,30 @@
 </template>
   
 <script>
+import { login } from '../services/auth.service.js';
+
 export default {
     name: "LoginView",
+    data() {
+        return {
+            email: "",
+            password: ""
+        };
+    },
+    methods: {
+        loginUser() {
+            const { email, password } = this;
+            login({ email, password })
+                .then(response => {
+                    const token = response.token;
+                    localStorage.setItem('token', token);
+                    window.location.href = '/';
+                })
+                .catch(error => {
+                    console.error(error);
+                });
+        }
+    }
 };
 </script>
   
@@ -238,13 +260,13 @@ input {
 .container.right-panel-active .overlay-right {
     transform: translateX(20%);
 }
-.overlay-image {
-  position: absolute;
-  top: 50%;
-  left: 70%;
-  transform: translate(-50%, -50%);
-  max-width: 100%;
-  max-height: 100%;
-}
 
+.overlay-image {
+    position: absolute;
+    top: 50%;
+    left: 70%;
+    transform: translate(-50%, -50%);
+    max-width: 100%;
+    max-height: 100%;
+}
 </style>  

@@ -68,7 +68,7 @@
                   <option value="Labrador Retriever">Labrador Retriever</option>
                   <option value="Bulldog">Bulldog</option>
                   <option value="Golden Retriever">Golden Retriever</option>
-                  <option value="Golden Retriever">Otro</option>
+                  <option value="Otro">Otro</option>
                 </select>
                 <label for="raza">Raza</label>
               </div>
@@ -78,14 +78,14 @@
                   <option value="Persa">Persa</option>
                   <option value="Siames">Siames</option>
                   <option value="Bengala">Bengala</option>
-                  <option value="Bengala">Otro</option>
+                  <option value="Otro">Otro</option>
                 </select>
                 <label for="raza">Raza</label>
               </div>
               <div class="form-floating mb-3" v-else>
                 <select class="form-select rounded-3" v-model="race">
                   <option value="" selected disabled>Raza</option>
-                  <option value="OtraRaza1">Otro</option>
+                  <option value="Otro">Otro</option>
                 </select>
                 <label for="raza">Raza</label>
               </div>

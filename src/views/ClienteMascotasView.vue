@@ -4,6 +4,7 @@
       <thead>
         <tr>
           <th>Nombre de la mascota</th>
+          <th>Petrut</th>
           <th>Especie</th>
           <th>Raza</th>
           <th>Chip</th>
@@ -11,12 +12,14 @@
         </tr>
       </thead>
       <tbody>
-        <tr class="mascota" v-for="mascota in mascotas" :key="mascota._id" :mascota="mascota">
+        <tr class="mascota" v-for="(mascota, index) in mascotas" :key="mascota._id" :mascota="mascota">
           <td>{{ mascota.name }}</td>
+          <td>{{ mascota.petrut }}</td>
           <td>{{ mascota.animal }}</td>
           <td>{{ mascota.race }}</td>
           <td>{{ mascota.chip }}</td>
-          <td><button class="ver-detalles">Pedir cita</button></td>
+          <button class="pedir-cita apretados">Pedir cita</button>
+          <button class="eliminar apretados" @click="borrarMascota(index)">Eliminar</button>
         </tr>
       </tbody>
     </table>
@@ -87,7 +90,7 @@
 </template>
 
 <script>
-import { registerPet } from "@/services/pet.service.js";
+import { registerPet, deletePet } from "@/services/pet.service.js";
 import { listPets } from '@/services/user.service.js'
 
 export default {
@@ -124,6 +127,19 @@ export default {
       const result = await listPets({ limit: 3, offset: 0 });
       this.mascotas = result;
     },
+    borrarMascota(index) {
+      const mascota = this.mascotas[index];
+      const mascotaRut = mascota.petrut;
+
+      deletePet(mascotaRut)
+        .then((response) => {
+          this.mascotas.splice(index, 1); 
+          return response.data;
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    }
   },
 };
 </script>
@@ -163,6 +179,32 @@ export default {
 
 .ver-detalles {
   background-color: #225677;
+  color: #fff;
+  border: none;
+  border-radius: 20px;
+  padding: 8px 16px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.pedir-cita {
+  background-color: #225677;
+  color: #fff;
+  border: none;
+  border-radius: 20px;
+  padding: 8px 16px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.apretados {
+  margin-right: 5px;
+}
+
+.eliminar {
+  background-color: #a30000;
   color: #fff;
   border: none;
   border-radius: 20px;

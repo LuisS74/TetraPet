@@ -26,6 +26,12 @@ export default {
             password: "",
         };
     },
+    mounted() {
+        const token = localStorage.getItem("token");
+        if (token) {
+            window.location.href = '/';
+        }
+    },
     methods: {
         registerUser() {
             const { name, email, dni, password } = this;

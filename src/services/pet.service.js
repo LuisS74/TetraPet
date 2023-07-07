@@ -16,4 +16,16 @@ function registerPet({ name, petrut, animal, race, chip }) {
         });
 }
 
-export { registerPet };
+function deletePet(petrut) {
+    return axios
+        .delete(`${BASE_URL}/delete/${petrut}`, {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        })
+        .then((response) => {
+            return response.data;
+        });
+}
+
+export { registerPet, deletePet };

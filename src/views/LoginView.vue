@@ -28,6 +28,12 @@ export default {
             password: ""
         };
     },
+    mounted() {
+        const token = localStorage.getItem("token");
+        if (token) {
+            window.location.href = '/';
+        }
+    },
     methods: {
         loginUser() {
             const { email, password } = this;

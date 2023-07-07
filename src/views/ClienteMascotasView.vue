@@ -62,12 +62,30 @@
                 </select>
                 <label for="especie">Especie</label>
               </div>
-              <div class="form-floating mb-3">
+              <div class="form-floating mb-3" v-if="animal === 'Perro'">
                 <select class="form-select rounded-3" v-model="race">
                   <option value="" selected disabled>Raza</option>
-                  <option value="Raza1">Raza 1</option>
-                  <option value="Raza2">Raza 2</option>
-                  <option value="Raza3">Raza 3</option>
+                  <option value="Labrador Retriever">Labrador Retriever</option>
+                  <option value="Bulldog">Bulldog</option>
+                  <option value="Golden Retriever">Golden Retriever</option>
+                  <option value="Golden Retriever">Otro</option>
+                </select>
+                <label for="raza">Raza</label>
+              </div>
+              <div class="form-floating mb-3" v-else-if="animal === 'Gato'">
+                <select class="form-select rounded-3" v-model="race">
+                  <option value="" selected disabled>Raza</option>
+                  <option value="Persa">Persa</option>
+                  <option value="Siames">Siames</option>
+                  <option value="Bengala">Bengala</option>
+                  <option value="Bengala">Otro</option>
+                </select>
+                <label for="raza">Raza</label>
+              </div>
+              <div class="form-floating mb-3" v-else>
+                <select class="form-select rounded-3" v-model="race">
+                  <option value="" selected disabled>Raza</option>
+                  <option value="OtraRaza1">Otro</option>
                 </select>
                 <label for="raza">Raza</label>
               </div>
@@ -151,7 +169,6 @@ export default {
   border-radius: 10px;
   overflow: hidden;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  /* Agrega una sombra suave */
 }
 
 .mascotas-lista {

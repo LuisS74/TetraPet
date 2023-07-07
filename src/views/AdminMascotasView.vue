@@ -3,23 +3,23 @@
     <table class="mascotas-lista">
       <thead>
         <tr>
-          <th>ID</th>
           <th>Nombre de la mascota</th>
+          <th>Petrut</th>
           <th>Especie</th>
           <th>Raza</th>
-          <th>Fecha de nacimiento</th>
-          <th>Dueño de la mascota</th>
+          <th>Chip</th>
+          <th>Correo Dueño</th>
           <th></th>
         </tr>
       </thead>
       <tbody>
-        <tr class="mascota" v-for="mascota in mascotas" :key="mascota.id">
-          <td>{{ mascota.id }}</td>
-          <td>{{ mascota.nombre }}</td>
-          <td>{{ mascota.especie }}</td>
-          <td>{{ mascota.raza }}</td>
-          <td>{{ mascota.fechaNacimiento }}</td>
-          <td>{{ mascota.dueno }}</td>
+        <tr class="mascota" v-for="mascota in mascotas" :key="mascota._id" :mascota="mascota">
+          <td>{{ mascota.name }}</td>
+          <td>{{ mascota.petrut }}</td>
+          <td>{{ mascota.animal }}</td>
+          <td>{{ mascota.race }}</td>
+          <td>{{ mascota.chip ? 'Si' : 'No' }}</td>
+          <td>{{ mascota.owner }}</td>
           <td><button class="ver-detalles">Ver detalles</button></td>
         </tr>
       </tbody>
@@ -28,29 +28,23 @@
 </template>
 
 <script>
+import { listAllPets } from '../services/user.service.js';
+
 export default {
   name: "AdminMascotasView",
   data() {
     return {
-      mascotas: [
-        {
-          id: 1,
-          nombre: "Riñoberto",
-          especie: "Canino",
-          raza: "Chihuahua",
-          fechaNacimiento: "05/05/2017",
-          dueno: "Juan Pérez"
-        },
-        {
-          id: 2,
-          nombre: "Anastacio",
-          especie: "Felino",
-          raza: "No Sabe",
-          fechaNacimiento: "10/10/2019",
-          dueno: "María García"
-        }
-      ]
+      mascotas: []
     };
+  },
+  created() {
+    this.obtenerMascotas();
+  },
+  methods: {
+    async obtenerMascotas() {
+      const result = await listAllPets({ limit: 3, offset: 0 });
+      this.mascotas = result;
+    }
   }
 };
 </script>
@@ -61,14 +55,15 @@ export default {
   max-width: 1200px;
   border-radius: 10px;
   overflow: hidden;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Agrega una sombra suave */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  /* Agrega una sombra suave */
 }
 
 .mascotas-lista {
   width: 100%;
   border-collapse: separate;
   border-spacing: 0;
-  background: linear-gradient(45deg, #f0f0f0, #ffffff); 
+  background: linear-gradient(45deg, #f0f0f0, #ffffff);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 

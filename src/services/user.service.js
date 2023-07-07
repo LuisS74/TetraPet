@@ -20,4 +20,20 @@ function listPets({ limit, offset }) {
         });
 }
 
-export { listPets };
+function listAllPets({ limit, offset }) {
+    return axios
+        .get(`${BASE_URL}/all/pets`, {
+            params: {
+                limit,
+                offset,
+            },
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        })
+        .then((result) => {
+            return result.data;
+        });
+}
+
+export { listPets, listAllPets };

@@ -19,7 +19,78 @@
           <td>{{ mascota.race }}</td>
           <td>{{ mascota.chip ? 'Si' : 'No' }}</td>
           <button class="pedir-cita apretados">Pedir cita</button>
-          <button class="editar apretados" >Editar</button>
+          <button class="editar apretados" data-bs-toggle="modal"
+            @click="seleccionarMascota(mascota.name, mascota.petrut, mascota.animal, mascota.race, mascota.chip)"
+            data-bs-target="#editPet">Editar</button>
+          <div class="modal p-3 py-md-4" tabindex="-1" role="dialog" id="editPet">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content rounded-4 shadow">
+                <div class="modal-header p-5 pb-4 border-bottom-0">
+                  <h1 class="fw-bold mb-0 fs-2">Editar mascota</h1>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body p-5 pt-0">
+                  <!-- Formulario editar mascota -->
+                  <form @submit.prevent="editarMascota()">
+                    <div class="form-floating mb-3">
+                      <input type="text" class="form-control rounded-3" v-model="name" placeholder="Nombre">
+                      <label for="nombre">Nombre</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                      <input type="text" class="form-control rounded-3" v-model="petrut" placeholder="Petrut">
+                      <label for="petrut">Petrut</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                      <select class="form-select rounded-3" v-model="animal">
+                        <option value="" selected disabled>Especie</option>
+                        <option value="Perro">Perro</option>
+                        <option value="Gato">Gato</option>
+                        <option value="Otro">Otro</option>
+                      </select>
+                      <label for="especie">Especie</label>
+                    </div>
+                    <div class="form-floating mb-3" v-if="animal === 'Perro'">
+                      <select class="form-select rounded-3" v-model="race">
+                        <option value="" selected disabled>Raza</option>
+                        <option value="Labrador Retriever">Labrador Retriever</option>
+                        <option value="Bulldog">Bulldog</option>
+                        <option value="Golden Retriever">Golden Retriever</option>
+                        <option value="Otro">Otro</option>
+                      </select>
+                      <label for="raza">Raza</label>
+                    </div>
+                    <div class="form-floating mb-3" v-else-if="animal === 'Gato'">
+                      <select class="form-select rounded-3" v-model="race">
+                        <option value="" selected disabled>Raza</option>
+                        <option value="Persa">Persa</option>
+                        <option value="Siames">Siames</option>
+                        <option value="Bengala">Bengala</option>
+                        <option value="Otro">Otro</option>
+                      </select>
+                      <label for="raza">Raza</label>
+                    </div>
+                    <div class="form-floating mb-3" v-else>
+                      <select class="form-select rounded-3" v-model="race">
+                        <option value="" selected disabled>Raza</option>
+                        <option value="Otro">Otro</option>
+                      </select>
+                      <label for="raza">Raza</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                      <select class="form-select rounded-3" v-model="chip">
+                        <option value="" selected disabled>Chip</option>
+                        <option value="true">Si</option>
+                        <option value="false">No</option>
+                      </select>
+                      <label for="chip">Chip</label>
+                    </div>
+                    <br>
+                    <button class="w-100 mb-2 btn btn-lg ver-detalles" type="submit">Editar</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
           <button class="eliminar apretados" @click="borrarMascota(index)">Eliminar</button>
         </tr>
       </tbody>
@@ -109,7 +180,7 @@
 </template>
 
 <script>
-import { registerPet, deletePet } from "@/services/pet.service.js";
+import { registerPet, updatePet, deletePet } from "@/services/pet.service.js";
 import { listPets } from '@/services/user.service.js'
 
 export default {
@@ -158,7 +229,34 @@ export default {
         .catch((error) => {
           console.error(error);
         });
-    }
+    },
+    seleccionarMascota(name, petrut, animal, race, chip) {
+      this.name = name;
+      this.petrut = petrut;
+      this.animal = animal;
+      this.race = race;
+      this.chip = chip;
+    },
+    editarMascota() {
+      const { name, petrut, animal, race, chip } = this;
+      const chipValue = chip === "true";
+
+      updatePet({
+        petRut: petrut,
+        name,
+        petrut,
+        animal,
+        race,
+        chip: chipValue,
+      })
+        .then((response) => {
+          window.location.reload();
+          return response.data;
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    },
   },
 };
 </script>

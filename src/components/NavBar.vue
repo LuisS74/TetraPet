@@ -37,7 +37,6 @@
                 {{ user.name }}
               </a>
               <ul class="dropdown-menu dropdown-menu-end">
-                <li><a class="dropdown-item" href="#">Perfil</a></li>
                 <li><a class="dropdown-item" href="/listado-mascotas/cliente/">Pedir cita</a></li>
                 <li><a class="dropdown-item" href="#" @click="cerrarSesion()">Cerrar sesión</a></li>
               </ul>

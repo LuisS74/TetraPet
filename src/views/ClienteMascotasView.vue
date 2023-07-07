@@ -17,7 +17,7 @@
           <td>{{ mascota.petrut }}</td>
           <td>{{ mascota.animal }}</td>
           <td>{{ mascota.race }}</td>
-          <td>{{ mascota.chip }}</td>
+          <td>{{ mascota.chip ? 'Si' : 'No' }}</td>
           <button class="pedir-cita apretados">Pedir cita</button>
           <button class="eliminar apretados" @click="borrarMascota(index)">Eliminar</button>
         </tr>
@@ -56,18 +56,18 @@
               <div class="form-floating mb-3">
                 <select class="form-select rounded-3" v-model="animal">
                   <option value="" selected disabled>Especie</option>
-                  <option value="perro">Perro</option>
-                  <option value="gato">Gato</option>
-                  <option value="otro">Otro</option>
+                  <option value="Perro">Perro</option>
+                  <option value="Gato">Gato</option>
+                  <option value="Otro">Otro</option>
                 </select>
                 <label for="especie">Especie</label>
               </div>
               <div class="form-floating mb-3">
                 <select class="form-select rounded-3" v-model="race">
                   <option value="" selected disabled>Raza</option>
-                  <option value="raza1">Raza 1</option>
-                  <option value="raza2">Raza 2</option>
-                  <option value="raza3">Raza 3</option>
+                  <option value="Raza1">Raza 1</option>
+                  <option value="Raza2">Raza 2</option>
+                  <option value="Raza3">Raza 3</option>
                 </select>
                 <label for="raza">Raza</label>
               </div>
@@ -133,7 +133,7 @@ export default {
 
       deletePet(mascotaRut)
         .then((response) => {
-          this.mascotas.splice(index, 1); 
+          this.mascotas.splice(index, 1);
           return response.data;
         })
         .catch((error) => {

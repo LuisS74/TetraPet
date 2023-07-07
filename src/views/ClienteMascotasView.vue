@@ -19,6 +19,7 @@
           <td>{{ mascota.race }}</td>
           <td>{{ mascota.chip ? 'Si' : 'No' }}</td>
           <button class="pedir-cita apretados">Pedir cita</button>
+          <button class="editar apretados" >Editar</button>
           <button class="eliminar apretados" @click="borrarMascota(index)">Eliminar</button>
         </tr>
       </tbody>
@@ -162,6 +163,7 @@ export default {
 };
 </script>
 
+
 <style scoped>
 .table-container {
   margin: 60px auto;
@@ -218,6 +220,17 @@ export default {
 
 .apretados {
   margin-right: 5px;
+}
+
+.editar {
+  background-color: rgb(40, 129, 184);
+  color: #fff;
+  border: none;
+  border-radius: 20px;
+  padding: 8px 16px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s;
 }
 
 .eliminar {
